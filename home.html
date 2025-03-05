@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forensic Investigation Tool</title>
+    <link rel="stylesheet" href="home.css">
+</head>
+<body>
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('loginModal')">&times;</span>
+            <h2>Login</h2>
+            <form id="login-form">
+                <label for="username" style="color: black;">Username:</label>   
+                <input type="text" id="username" name="username" required><br><br>
+                <label for="password" style="color: black;">Password:</label>
+                <input type="password" id="password" name="password" required><br><br>
+                <div class="modal-actions">
+                    <a href="#" class="signup-link" onclick="openSignupModal()">Sign Up</a>
+                    <button type="submit" class="login-submit">Login</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div id="signupModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('signupModal')">&times;</span>
+            <h2>Sign Up</h2>
+            <form onsubmit="return handleSignup(event)">
+                <label for="signup-username" style="color: black;">Username:</label>
+                <input type="text" id="signup-username" name="signup-username" required><br><br>
+                <label for="bench-code" style="color: black;">Bench Code:</label>
+                <input type="text" id="bench-code" name="bench-code" required><br><br>
+                <label for="signup-password" style="color: black;">Password:</label>
+                <input type="password" id="signup-password" name="signup-password" required><br><br>
+                <label for="confirm-password" style="color: black;">Confirm Password:</label>
+                <input type="password" id="confirm-password" name="confirm-password" required><br><br>
+                <button type="submit" class="login-submit">Sign Up</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Main Page -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <!-- This heading will change after login -->
+                <h1 id="page-heading">NIA Forensic Investigation Tool</h1>
+                
+                <!-- This login button will be replaced after login -->
+                <button class="login-button" onclick="openLoginModal()" id="loginButton">Login</button>
+                
+                <!-- User Section (Visible after login) -->
+                <div id="user-section" style="display: none;">
+                    <span id="user-icon">👤</span>
+                    <span id="username-display"></span>
+                    <nav id="dropdown-menu">
+                        <ul>
+                            <li class="dropdown">Home
+                                <div class="dropdown-content">
+                                </div>
+                            </li>
+                            <li class="dropdown">About
+                                <div class="dropdown-content">
+                                    <a href="#" id="overview-option">Overview</a>
+                                    <a href="#" id="mission-option">Mission</a>
+                                </div>
+                            </li>
+                            <li class="dropdown">Guidelines
+                                <div class="dropdown-content">
+                                    <a href="#">Policy</a>
+                                    <a href="#">Security</a>
+                                </div>
+                            </li>
+                            <li class="dropdown"><a href="http://localhost:3000/index1.html">Social Media</a>
+                                <div class="dropdown-content">
+                                </div>
+                            </li>
+                            
+
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- User Section (Visible after login) -->
+    <div id="user-section" style="display: none;">
+        <span id="user-icon">👤</span>
+        <span id="username-display"></span>
+        <nav id="dropdown-menu">
+            <ul>
+                <li class="dropdown">Home</li>
+                <li class="dropdown">About
+                    <div class="dropdown-content">
+                        <a href="#">Overview</a>
+                        <a href="#">Mission</a>
+                    </div>
+                </li>
+                <li class="dropdown">Guidelines
+                    <div class="dropdown-content">
+                        <a href="#">Policy</a>
+                        <a href="#">Security</a>
+                    </div>
+                </li>
+                <li class="dropdown">Social Media
+                    <!--<div class="dropdown-content">
+                        <a href="#">Facebook</a>
+                        <a href="#">Twitter</a>
+                    </div>-->
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="background-image">
+        <!-- Space for background image -->
+    </div>   
+
+    <section class="marquee-section">
+        <marquee behavior="scroll" direction="left" class="marquee-text">
+            Welcome to the Anti-Cyber Terrorism Division's Forensic Investigation Tool. 
+            This tool helps in parsing social media feeds, capturing screenshots, and documenting evidence with precision.
+        </marquee>
+    </section>
+
+    <section class="content">
+        <div class="container">
+            <div class="content-row">
+                <div class="about-tool">
+                    <h2>About the Tool</h2>
+                    <p style="color: black;">
+                        The National Investigation Agency (NIA) has developed a specialized tool for forensic investigation officers. 
+                        This tool automatically parses data from social media accounts under investigation and generates documented screenshots 
+                        of posts, messages, timelines, friend lists, followers, account information, and more.
+                    </p>
+                </div>
+
+                <div class="key-features">
+                    <h2>Key Features</h2>
+                    <ul style="color: black;">
+                        <li>Automatic parsing of social media data</li>
+                        <li>Generation of documented screenshots</li>
+                        <li>Support for multiple platforms</li>
+                        <li>Android and Windows versions available</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="win">
+                        <h3>What is NIA?</h3>
+                        <p>The National Investigation Agency (NIA) is India's primary counter-terrorism law enforcement agency, established under the National Investigation Agency Act of 2008. It was formed in response to the 2008 Mumbai terror attacks, with the goal of addressing the growing threat of terrorism in India. The NIA is empowered to investigate and prosecute offenses related to terrorism, national security, and other serious crimes, such as human trafficking, organized crime, and offenses against nuclear facilities. The agency operates under the Ministry of Home Affairs and has the authority to take over cases from state police forces if they involve issues of national importance or cross-border implications.</p>
+                        <p>The NIA functions as a centralized investigative body with jurisdiction across the entire country, enabling it to coordinate and conduct investigations without the limitations of state boundaries. The agency works closely with other national and international security and intelligence agencies to tackle terrorism and other serious crimes. Over the years, the NIA has been instrumental in investigating and solving high-profile cases, playing a crucial role in maintaining national security and ensuring justice is served in cases of terrorism and related offenses.</p>
+
+                        <div class="media-container">
+                            <!-- YouTube Video -->
+                    
+                            <video autoplay="" controls="" loop="" width="48%" class="h">
+                                <source src="NIA.mp4" type= "video/mp4">
+                            </video>
+                            
+                            <!-- Image -->
+                            <div class="n">
+                                <img src="NIA.jpg" alt="NIA Image" width="500px" height="300px" style="
+                                    padding-right: 300px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="themes-section">
+        <div class="container">
+            <h2>Themes</h2>
+            <h3>National Investigation Agency</h3>
+            <div class="themes-row">
+                <div class="theme-box">
+                    <h4>Automated Social Media Data Extraction and Documentation</h4>
+                    <p>Focus on developing tools that automatically extract, document, and provide screenshots of various social media activities (posts, messages, timelines, friend lists, etc.) to ensure accuracy and thorough examination without human error.These tools should be designed to streamline the investigative process.</p>
+                </div>
+                <div class="theme-box">
+                    <h4>Cross-Platform Forensic Tools for Cyber Investigations</h4>
+                    <p>Emphasize the importance of creating versatile forensic tools compatible with both Android and Windows platforms, enabling investigators to effectively access and analyze social media data, even when certain accounts do not open on desktops.These cross-platform capabilities ensure that forensic professionals.</p>
+                </div>
+                <div class="theme-box">
+                    <h4>Enhanced Cyber Investigation through Specialized Software Solutions</h4>
+                    <p>Develop software solutions tailored for cyber investigations, particularly within the anti-cyber terrorism domain, to streamline the process of analyzing and documenting social media activity across platforms like Facebook, Twitter, Instagram, Telegram, WhatsApp, and Google accounts.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section style="background-color: rgba(172, 255, 47, 0.638)">
+        <h2 style="text-align: center; color: #000;; font-size: 30px;">NIA PROCESS FLOW</h2>
+        <div class="media-container">
+            <div class="inv">
+                <img src="inve.jpg" alt="inve Image" style="padding-left: 150px;">
+            </div>
+            <div class="inv">
+                <img src="flow1.jpg" alt="inve Image" style="padding-right: 150px;">
+            </div>
+        </div>
+    </section>
+    <section style="background-color: aliceblue;">
+        <div class="box">
+        <div class="button-container" style="text-align: center;">
+            <button id="electedButton">Elected officer responsible</button>
+            <button id="executiveButton">Agency executive</button>
+          </div>
+          
+          <div id="imageContainer" >
+            <div class="image-item" id="primeMinisterItem">
+                <img id="primeMinisterImage" src="ami.jpg" alt="Hon'ble Minister" class="circular-image">
+                <p style="font-size: 10px; font-weight: bold;">Amit Shah</p>
+                <p class="image-name">Honourable Minister</p>
+            </div>
+            <div class="image-item" id="agencyExecutiveItem" style="display: none;">
+                <img id="agencyExecutiveImage" src="agency.jpg" alt="Agency Executive" class="circular-image">
+                <p style="font-size: 10px; font-weight: bold;">Sadanand Date</p>
+                <p class="image-name">Agency Executive</p>
+            </div>
+          </div>
+        </div>       
+    </section>
+
+    <section style="background-color: rgba(128, 128, 128, 0.573); padding: 40px 0;">
+        <h2 style="text-align: center; color: black; font-size: 30px;">NIA PROFESSIONALS</h2>
+        <h2 style="padding-bottom: 5px;">   </h2>
+        <div class="image-row">
+            <div class="image-item">
+                <div class="image-box">
+                    <img src="i1.jpg" alt="Image 1" class="circular-image">
+                    <p class="image-name">Raj kumar</p>
+                </div>
+            </div>
+            <div class="image-item">
+                <div class="image-box">
+                    <img src="i2.jpg" alt="Image 2" class="circular-image">
+                    <p class="image-name">Rajnath</p>
+                </div>
+            </div>
+            <div class="image-item">
+                <div class="image-box">
+                    <img src="i3.jpg" alt="Image 3" class="circular-image">
+                    <p class="image-name">Sanjeev</p>
+                </div>
+            </div>
+        </div>
+        <div class="image-row">
+            <div class="image-item">
+                <div class="image-box">
+                    <img src="i4.jpg" alt="Image 4" class="circular-image">
+                    <p class="image-name">Marudh</p>
+                </div>
+            </div>
+            <div class="image-item">
+                <div class="image-box">
+                    <img src="i5.jpg" alt="Image 5" class="circular-image">
+                    <p class="image-name">Arun Mayan</p>
+                </div>
+            </div>
+            <div class="image-item">
+                <div class="image-box">
+                    <img src="i6.jpg" alt="Image 6" class="circular-image">
+                    <p class="image-name">Suraj Kumar</p>
+                </div>
+            </div>
+        </div>
+    </section>S
+
+    <script src="home.js"></script>
+</body>
+</html>
